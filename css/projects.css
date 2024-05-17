@@ -1,0 +1,186 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 18px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 15px;
+    /* overflow: hidden; */
+}
+
+.header, .heading, .projects .operations {
+    width: 100%;
+    height: 100%;
+}
+
+.header, .heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header h1 {
+    /* font-size: 36px; */
+    text-transform: uppercase;
+}
+
+.heading h2 {
+    /* font-size: 36px; */
+    text-transform: capitalize;
+}
+
+.header {
+    flex: 1;
+    background-color: blue;
+    color: white;
+}
+
+.heading {
+    flex: 1;
+    background-color: white;
+    color: blue;
+}
+
+.projects {
+    flex: 7;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(100%, auto);
+    gap: 15px;
+    overflow-y: auto;
+}
+
+.projects .project {
+    border: 1px solid blue;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    grid-area: 10px;
+}
+
+.projects .project .project-img {
+    flex: 1;
+    width: 100%;
+}
+
+.projects .project .project-img img {
+    width: 100%;
+    height: 100%;
+}
+
+.projects .project .project-details {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 5px;
+}
+
+.operations {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.operations button {
+    border: none;
+    border-radius: 6px;
+    min-width: 150px;
+    color: white;
+    background-color: blue;
+    padding: 5px;
+    text-transform: capitalize;
+}
+
+#form-section {
+    display: none;
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+}
+
+#form-section form {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 50px;
+}
+
+#form-section form .form-input:nth-child(1) {
+    display: flex;
+    align-items: center;
+    background-color: blue;
+}
+
+#form-section form .form-input h1 {
+    font-size: 36px;
+    text-transform: uppercase;
+    color: white;
+}
+
+#form-section form .form-input {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 15px;
+}
+
+#form-section form .form-input label {
+    text-transform: capitalize;
+}
+
+#form-section form .form-input input {
+    outline: none;
+    padding: 10px;
+}
+
+#form-section form .form-input textarea {
+    padding: 10px;
+    outline: none;
+    min-height: 30vh;
+    resize: none;
+}
+
+#form-section form .form-input input[type='submit'] {
+    width: 50%;
+    align-self: center;
+    color: white;
+    background-color: blue;
+    border: none;
+    border-radius: 6px;
+}
+
+
+#error {
+    color: red;
+}
+
+
