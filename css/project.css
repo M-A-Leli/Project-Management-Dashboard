@@ -1,3 +1,11 @@
+:root {
+    --background-color: #f2f7ff;
+    --primary-btn-color: #007bff;
+    --hover-btn-color: #0056b3;
+    --border-color: #ccd9ff;
+    --text-color: #333333;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -11,6 +19,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--text-color);
+    background-color: var(--background-color);
 }
 
 section {
@@ -21,18 +31,19 @@ section {
     justify-content: center;
 }
 
-.container {
-    border: 1px solid red;
-    width: 70%;
+#container {
+    width: 80%;
     height: 80%;
+    padding: 30px;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    gap: 30px;
+    gap: 15px;
+    border: 1px solid var(--card-border-color);
+    background-color: #d9e8ff;
 }
 
 .project-img {
-    border: 1px solid green;
     width: 100%;
     height: 100%;
     display: flex;
@@ -43,10 +54,10 @@ section {
 .project-img img {
     width: 100%;
     height: auto;
+    max-height: 100%;
 }
 
 .project-details {
-    border: 1px solid green;
     width: 100%;
     height: 100%;
     padding: 15px;
@@ -54,18 +65,29 @@ section {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-evenly;
+    gap: 15px;
     overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.project-details::-webkit-scrollbar {
+    display: none;
 }
 
 .project-details .title {
-    font-size: 24px;
+    font-size: 36px;
     text-transform: capitalize;
 }
 
 .project-details .start-date-p,
+.project-details .status-p,
 .project-details .end-date-p {
-    font: bold;
     text-transform: capitalize;
+}
+
+.project-details span {
+    font-weight: bold;
 }
 
 .project-details .active {
@@ -78,12 +100,16 @@ section {
 
 .project-details button {
     min-width: 50%;
-    padding: 5px;
+    padding: 10px;
     border: none;
-    color: white;
-    background-color: blue;
-    border-radius: 6px;
+    color: #ffffff;
+    background-color: var(--primary-btn-color);
+    border-radius: 20px;
     text-transform: capitalize;
+}
+
+.project-details button:hover {
+    background-color: var(--hover-btn-color);
 }
 
 

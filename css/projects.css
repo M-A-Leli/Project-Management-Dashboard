@@ -1,3 +1,13 @@
+:root {
+    --background-color: #f2f7ff;
+    --primary-btn-color: #007bff;
+    --secondary-btn-color: #66b3ff;
+    --hover-btn-color: #0056b3;
+    --card-border-color: #ccd9ff;
+    --text-color: #333333;
+    --placeholder-color: #a8c2ff;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,12 +15,15 @@
 }
 
 body {
+    background-color: var(--background-color);
+    color: var(--text-color);
     font-size: 18px;
     width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 section {
@@ -21,10 +34,10 @@ section {
     align-items: center;
     justify-content: space-evenly;
     gap: 15px;
-    /* overflow: hidden; */
 }
 
 .header, .heading, .projects .operations {
+    /* border: 2px solid red; */
     width: 100%;
     height: 100%;
 }
@@ -36,25 +49,23 @@ section {
 }
 
 .header h1 {
-    /* font-size: 36px; */
     text-transform: uppercase;
 }
 
 .heading h2 {
-    /* font-size: 36px; */
     text-transform: capitalize;
 }
 
 .header {
     flex: 1;
-    background-color: blue;
-    color: white;
+    background-color:  #cce5ff ;
+    color: #666666;
 }
 
 .heading {
     flex: 1;
-    background-color: white;
-    color: blue;
+    background-color: #666666;
+    color: #cce5ff;
 }
 
 .projects {
@@ -65,10 +76,18 @@ section {
     grid-auto-rows: minmax(100%, auto);
     gap: 15px;
     overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.projects::-webkit-scrollbar {
+    display: none;
 }
 
 .projects .project {
-    border: 1px solid blue;
+    border: 1px solid var(--card-border-color);
+    background-color: #d9e8ff;
+    border-radius: 10px;
     width: 100%;
     height: 100%;
     padding: 10px;
@@ -80,11 +99,13 @@ section {
 }
 
 .projects .project .project-img {
+    border-radius: 10px;
     flex: 1;
     width: 100%;
 }
 
 .projects .project .project-img img {
+    border-radius: 10px;
     width: 100%;
     height: 100%;
 }
@@ -93,9 +114,34 @@ section {
     flex: 3;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-evenly;
     gap: 5px;
+}
+
+.projects .project .project-details .title,
+.projects .project .project-details .date,
+.projects .project .project-details .status-p {
+    text-transform: capitalize;
+}
+
+.projects .project .project-details span {
+    font-weight: bold;
+}
+
+.projects .project .project-details button {
+    min-width: 150px;
+    padding: 5px;
+    color: #333333;
+    text-transform: capitalize;
+    background-color: var(--secondary-btn-color);
+    border: none;
+    border-radius: 20px;
+}
+
+.projects .project .project-details button:hover {
+    cursor: pointer;
+    background-color:  #a6d4ff;
 }
 
 .operations {
@@ -110,10 +156,14 @@ section {
     border: none;
     border-radius: 6px;
     min-width: 150px;
-    color: white;
-    background-color: blue;
+    color: #ffffff;
+    background-color: var(--primary-btn-color);
     padding: 5px;
     text-transform: capitalize;
+}
+
+.operations button:hover {
+    background-color: var(--hover-btn-color);
 }
 
 #form-section {
@@ -136,13 +186,13 @@ section {
 #form-section form .form-input:nth-child(1) {
     display: flex;
     align-items: center;
-    background-color: blue;
+    background-color:  #cce5ff ;
+    color: #666666;
 }
 
 #form-section form .form-input h1 {
     font-size: 36px;
-    text-transform: uppercase;
-    color: white;
+    text-transform: capitalize;
 }
 
 #form-section form .form-input {
@@ -158,12 +208,18 @@ section {
 }
 
 #form-section form .form-input input {
+    background-color: #ffffff;
+    border: 1px solid #99c2ff;
+    border-radius: 6px;
     outline: none;
     padding: 10px;
 }
 
 #form-section form .form-input textarea {
     padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #99c2ff;
+    border-radius: 6px;
     outline: none;
     min-height: 30vh;
     resize: none;
@@ -172,15 +228,25 @@ section {
 #form-section form .form-input input[type='submit'] {
     width: 50%;
     align-self: center;
-    color: white;
-    background-color: blue;
+    color: #ffffff;
+    background-color: var(--primary-btn-color);
     border: none;
-    border-radius: 6px;
+    border-radius: 20px;
+    text-transform: capitalize;
 }
 
+#form-section form .form-input input[type='submit']:hover {
+    background-color: var(--hover-btn-color);
+}
 
 #error {
     color: red;
 }
 
+.completed {
+    color: red;
+}
 
+.active {
+    color: blue;
+}

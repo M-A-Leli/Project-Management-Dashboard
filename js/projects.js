@@ -1,5 +1,4 @@
 let Projects = [];
-let Project = {};
 
 const createProjectBtn = document.getElementById('new-project-btn');
 const fetchAllProjectsBtn = document.getElementById('fetch-all-projects-btn');
@@ -9,7 +8,6 @@ const clearCompletedProjectsBtn = document.getElementById('clear-completed-proje
 const createProjectForm = document.getElementById('new-project-form');
 const projectsSection = document.getElementById('projects-section');
 const formSection = document.getElementById('form-section');
-const moreInfoBtn = document.getElementById('fmore-info-btn');
 
 createProjectBtn.addEventListener('click', toggleForm);
 fetchAllProjectsBtn.addEventListener('click', fetchAllProjects);
@@ -20,7 +18,6 @@ createProjectForm.addEventListener('submit', (event) => {
     event.preventDefault();
     createProject();
 });
-moreInfoBtn.addEventListener('click', fetchProductById);
 
 function toggleForm() {
     if (projectsSection.classList.contains('hidden')) {
@@ -64,6 +61,8 @@ function createProject() {
     
     Projects.push(newProject);
     saveProjects();
+
+    document.getElementById('new-project-form').reset();
     
     document.getElementById('projects').value = '';
     renderProjects(Projects);
@@ -72,10 +71,6 @@ function createProject() {
 
 function fetchAllProjects() {
     renderProjects(Projects);
-}
-
-function fetchProductById() {
-    renderProject(Project);
 }
 
 function fetchActiveProjects() {
@@ -125,107 +120,63 @@ function renderProjects(ProjectsArray) {
         projectTitle.classList.add('title');
         projectTitle.textContent = project.title;
 
+        // Truncate description to first 10 words
+        let descriptionWords = project.description.split(' ');
+        let truncatedDescription = descriptionWords.slice(0, 10).join(' ');
+        if (descriptionWords.length > 10) {
+            truncatedDescription += '...';
+        }
+
         let projectDescription = document.createElement('p');
         projectDescription.classList.add('description');
-        projectDescription.textContent = project.title;
+        projectDescription.textContent = truncatedDescription;
 
-        let projectStartDate = document.createElement('p');
+        let projectDates = document.createElement('p');
+        projectDates.classList.add('date');
+
+        let projectStartDate = document.createElement('span')
         projectStartDate.classList.add('start-date');
-        projectStartDate.textContent += project.start_date;
+        projectStartDate.textContent = 'start: ' + project.start_date;
 
-        let projectEndDate = document.createElement('p');
+        let projectEndDate = document.createElement('span');
         projectEndDate.classList.add('end-date');
-        projectEndDate.textContent += project.end_date;
+        projectEndDate.textContent = ' end: ' + project.end_date;
 
-        let projectStatus = document.createElement('p');
+        let projectStatusP = document.createElement('p');
+        projectStatusP.classList.add('status-p');
+        projectStatusP.textContent = 'status: ';
+
+        let projectStatus = document.createElement('span');
+        projectStatus.classList.add('status');
         projectStatus.classList.add(project.status);
         projectStatus.textContent = project.status;
 
         let moreInfoBtn = document.createElement('button');
         moreInfoBtn.classList.add('more-info-btn');
+        moreInfoBtn.textContent = 'more info';
 
         imageDiv.appendChild(projectImage);
 
+        projectDates.appendChild(projectStartDate);
+        projectDates.appendChild(projectEndDate);
+
+        projectStatusP.appendChild(projectStatus);
+
         detailsDiv.appendChild(projectTitle);
         detailsDiv.appendChild(projectDescription);
-        detailsDiv.appendChild(projectStartDate);
-        detailsDiv.appendChild(projectEndDate);
-        detailsDiv.appendChild(projectStatus);
+        detailsDiv.appendChild(projectDates);
+        detailsDiv.appendChild(projectStatusP);
         detailsDiv.appendChild(moreInfoBtn);
 
         projectItem.appendChild(imageDiv);
         projectItem.appendChild(detailsDiv);
         
         moreInfoBtn.addEventListener('click', () => {
-            window.location.href = `./pages/?${project.id}`
+            window.location.href = `./pages/project.html?id=${project.id}`;
         });
         
         projectsContainer.appendChild(projectItem);
     });
-}
-
-function renderProject(project) {
-    let projectContainer = document.getElementById('container');
-    projectContainer.innerHTML = '';
-
-    let imageDiv = document.createElement('div');
-    imageDiv.classList.add('project-img');
-
-    let projectImage = document.createElement('img');
-    projectImage.setAttribute('src', project.image);
-
-    let detailsDiv = document.createElement('div');
-    detailsDiv.classList.add('project-details');
-
-    let projectTitle = document.createElement('h3');
-    projectTitle.classList.add('title');
-    projectTitle.textContent = project.title;
-    
-    let projectDescription = document.createElement('p');
-    projectDescription.classList.add('description');
-    projectDescription.textContent = project.title;
-    
-    let projectStartDate = document.createElement('p');
-    projectStartDate.classList.add('start-date-p');
-    projectStartDate.textContent += project.start_date;
-    
-    let projectEndDate = document.createElement('p');
-    projectEndDate.classList.add('end-date-p');
-    projectEndDate.textContent += project.end_date;
-    
-    let projectStatus = document.createElement('p');
-    projectStatus.classList.add(project.status);
-    projectStatus.textContent = project.status;
-    
-    let deleteBtn = document.createElement('button');
-    deleteBtn.classList.add('delete-btn');
-    
-    deleteBtn.addEventListener('click', () => {
-        deleteProject();
-    });
-
-    imageDiv.appendChild(projectImage);
-
-    detailsDiv.appendChild(projectTitle);
-    detailsDiv.appendChild(projectDescription);
-    detailsDiv.appendChild(projectStartDate);
-    detailsDiv.appendChild(projectEndDate);
-    detailsDiv.appendChild(projectStatus);
-
-    if(project.status === 'Active') {
-        let markAsCompletedBtn = document.createElement('button');
-        markAsCompletedBtn.classList.add('mark-completed-btn');
-        
-        markAsCompletedBtn.addEventListener('click', () => {
-            changeProjectStatus();
-        });
-
-        detailsDiv.appendChild(markAsCompletedBtn);
-    }
-
-    detailsDiv.appendChild(deleteBtn);
-
-    projectContainer.appendChild(projectItem);
 }
 
 function saveProjects() {
@@ -238,18 +189,6 @@ function loadProjects() {
         Projects = JSON.parse(storedProjects);
         renderProjects(Projects);
     }
-}
-
-function changeProjectStatus(projectId) {
-    let projectIndex = Projects.findIndex(project => project.id === projectId);
-    if (projectIndex !== -1) {
-        Projects[projectIndex].status = todos[projectIndex].status === 'active' ? 'completed' : 'active';
-        saveProjects();
-    }
-}
-
-function deleteProject() {
-
 }
 
 // Load existing Projects when the page loads
